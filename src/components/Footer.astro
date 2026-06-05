@@ -1,0 +1,57 @@
+---
+import { SocialLinks } from "@/components/react/SocialLinks"
+const year = new Date().getFullYear()
+---
+
+<footer class="relative overflow-hidden border-t bg-card/40">
+  <div class="container mx-auto max-w-6xl px-6 py-16">
+    <div class="grid gap-12 md:grid-cols-4">
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-2 text-lg font-semibold tracking-tight">
+          <span class="relative flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-amber-400 text-primary-foreground shadow-sm">
+            <svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"/>
+              <line x1="6" x2="18" y1="17" y2="17"/>
+            </svg>
+          </span>
+          Maitre
+        </div>
+        <p class="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+          El sistema que conecta sala, cocina y caja en una sola pantalla.
+          Más mesas atendidas. Cero platos perdidos.
+        </p>
+        <div class="mt-6">
+          <SocialLinks client:idle />
+        </div>
+      </div>
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-foreground">Producto</p>
+        <ul class="mt-4 space-y-2 text-sm text-muted-foreground">
+          <li><a href="#beneficios" class="transition hover:text-foreground">Beneficios</a></li>
+          <li><a href="#roles" class="transition hover:text-foreground">Por rol</a></li>
+          <li><a href="#precios" class="transition hover:text-foreground">Precios</a></li>
+          <li><a href="#faq" class="transition hover:text-foreground">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="text-xs font-semibold uppercase tracking-wider text-foreground">Contacto</p>
+        <ul class="mt-4 space-y-2 text-sm text-muted-foreground">
+          <li><a href="mailto:ventas@gventerprise.com" class="transition hover:text-foreground">ventas@gventerprise.com</a></li>
+          <li><a href="#" class="transition hover:text-foreground">WhatsApp</a></li>
+          <li><a href="#" class="transition hover:text-foreground">Lima, Perú</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-14 flex flex-col items-start justify-between gap-4 border-t pt-6 text-xs text-muted-foreground md:flex-row md:items-center">
+      <p>© {year} G.V. Enterprise SAC, derechos reservados.</p>
+      <div class="flex items-center gap-4">
+        <a href="#" class="transition hover:text-foreground">Privacidad</a>
+        <a href="#" class="transition hover:text-foreground">Términos</a>
+        <a href="#" class="transition hover:text-foreground">Cookies</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="pointer-events-none absolute -bottom-24 left-1/2 size-[40rem] -translate-x-1/2 rounded-full bg-gradient-to-br from-primary/20 via-amber-200/20 to-transparent blur-3xl" />
+</footer>

@@ -1,0 +1,38 @@
+---
+import Layout from "@/layouts/main.astro"
+import Nav from "@/components/Nav.astro"
+import Footer from "@/components/Footer.astro"
+import { SmoothScroll } from "@/components/react/SmoothScroll"
+import { CookieConsent } from "@/components/react/CookieConsent"
+import { Hero } from "@/components/react/Hero"
+import { LogosMarquee } from "@/components/react/LogosMarquee"
+import { Features } from "@/components/react/Features"
+import { Roles } from "@/components/react/Roles"
+import { RealtimeBeam } from "@/components/react/RealtimeBeam"
+import { Stats } from "@/components/react/Stats"
+import { FAQ } from "@/components/react/FAQ"
+import { CTA } from "@/components/react/CTA"
+import { BeforeAfter } from "@/components/react/BeforeAfter"
+import { Testimonial } from "@/components/react/Testimonial"
+import { Pricing } from "@/components/react/Pricing"
+---
+
+<Layout>
+  <SmoothScroll client:load />
+  <Nav />
+  <main class="relative">
+    <Hero client:load />
+    <LogosMarquee client:visible />
+    <Features client:visible />
+    <BeforeAfter client:visible />
+    <RealtimeBeam client:visible />
+    <Roles client:visible />
+    <Stats client:visible />
+    <Testimonial client:visible />
+    <Pricing client:visible />
+    <FAQ client:visible />
+    <CTA client:visible />
+  </main>
+  <Footer />
+  <CookieConsent client:idle />
+</Layout>

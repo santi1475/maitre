@@ -1,0 +1,40 @@
+---
+import "@/styles/global.css"
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = "Maitre · Sistema de gestión para restaurantes",
+  description = "Pedidos, mesas, cocina y cierres en tiempo real. Auditoría exhaustiva, idempotencia end-to-end y operación multi-sucursal.",
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#FFFAF5" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+    <script is:inline>
+      (function () {
+        try {
+          var k = "maitre.theme"
+          var s = localStorage.getItem(k)
+          var d = s === "dark" || (!s && window.matchMedia("(prefers-color-scheme: dark)").matches)
+          var r = document.documentElement
+          if (d) r.classList.add("dark")
+          r.style.colorScheme = d ? "dark" : "light"
+        } catch (e) {}
+      })()
+    </script>
+  </head>
+  <body class="min-h-svh overflow-x-hidden">
+    <slot />
+  </body>
+</html>
