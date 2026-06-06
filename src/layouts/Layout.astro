@@ -1,5 +1,6 @@
 ---
-import "@/styles/global.css"
+import "@/styles/globals.css"
+import ThemeScript from "@/components/ThemeScript.astro"
 
 interface Props {
   title?: string
@@ -13,28 +14,16 @@ const {
 ---
 
 <!doctype html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#FFFAF5" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
-    <script is:inline>
-      (function () {
-        try {
-          var k = "maitre.theme"
-          var s = localStorage.getItem(k)
-          var d = s === "dark" || (!s && window.matchMedia("(prefers-color-scheme: dark)").matches)
-          var r = document.documentElement
-          if (d) r.classList.add("dark")
-          r.style.colorScheme = d ? "dark" : "light"
-        } catch (e) {}
-      })()
-    </script>
+    <ThemeScript />
   </head>
-  <body class="min-h-svh overflow-x-hidden">
+  <body class="bg-cream dark:bg-[#111009] text-ink dark:text-[#e8e4dc] font-sans antialiased">
     <slot />
   </body>
 </html>
