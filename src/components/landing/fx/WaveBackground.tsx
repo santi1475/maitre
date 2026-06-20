@@ -16,7 +16,7 @@ export function WaveBackground({
       className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
     >
       <svg
-        className="absolute inset-x-0 top-1/4 h-1/2 w-[200%]"
+        className="absolute inset-x-0 bottom-0 h-1/2 w-[200%]"
         viewBox="0 0 1200 200"
         preserveAspectRatio="none"
         style={{ animation: "wave-slide 18s linear infinite" }}
@@ -28,7 +28,7 @@ export function WaveBackground({
         />
       </svg>
       <svg
-        className="absolute inset-x-0 top-1/3 h-1/2 w-[200%]"
+        className="absolute inset-x-0 bottom-0 h-[42%] w-[200%]"
         viewBox="0 0 1200 200"
         preserveAspectRatio="none"
         style={{ animation: "wave-slide 26s linear -8s infinite reverse" }}

@@ -2,7 +2,7 @@
 // Example: <Hero client:load />
 import { motion, useReducedMotion, type Variants } from "motion/react"
 import { NumberTicker } from "@/components/ui/number-ticker"
-import { GlowOrbs } from "./fx/GlowOrbs"
+import { SilkBackground } from "@/components/ui/silk-background"
 
 const container: Variants = {
   hidden: {},
@@ -33,7 +33,7 @@ export function Hero() {
         variants={variantsContainer}
         className="relative flex min-h-[90vh] w-full flex-col justify-center overflow-hidden bg-cream px-6 pb-20 pt-32 dark:bg-[#111009]"
       >
-        <GlowOrbs variant="soft" count={3} />
+        <SilkBackground />
 
         <div className="relative z-10 mx-auto w-full max-w-4xl text-center">
           <motion.div

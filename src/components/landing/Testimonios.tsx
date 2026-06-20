@@ -1,7 +1,6 @@
 // Import in Astro with `client:visible` — Marquee + pause-on-hover need hydration.
 // Example: <Testimonios client:visible />
 import { Marquee } from "@/components/ui/marquee"
-import { GlowOrbs } from "./fx/GlowOrbs"
 
 type Testimonio = {
   quote: string
@@ -34,9 +33,12 @@ const TESTIMONIOS: Testimonio[] = [
   },
 ]
 
+// Offset each column's starting order so the 3D wall doesn't read as one repeated row.
+const rotate = (arr: Testimonio[], n: number) => [...arr.slice(n), ...arr.slice(0, n)]
+
 function Card({ t }: { t: Testimonio }) {
   return (
-    <div className="flex min-w-[300px] max-w-[340px] flex-col justify-between rounded-2xl border border-stone/10 bg-white p-6 dark:bg-[#1e1c19]">
+    <div className="flex w-[280px] flex-col justify-between rounded-2xl border border-stone/10 bg-white p-5 shadow-sm dark:bg-[#1e1c19]">
       <div>
         <div
           className="mb-2 font-serif text-4xl leading-none text-primary"
@@ -63,27 +65,68 @@ function Card({ t }: { t: Testimonio }) {
   )
 }
 
+// Each column: a vertical marquee, alternating direction, with a rotated card order.
+const COLUMNS = [
+  { reverse: false, data: rotate(TESTIMONIOS, 0), show: "" },
+  { reverse: true, data: rotate(TESTIMONIOS, 1), show: "" },
+  { reverse: false, data: rotate(TESTIMONIOS, 2), show: "hidden md:flex" },
+  { reverse: true, data: rotate(TESTIMONIOS, 1), show: "hidden lg:flex" },
+]
+
 export function Testimonios() {
   return (
-    <section className="relative overflow-hidden bg-primary-light/30 py-24 dark:bg-primary/5">
-      <GlowOrbs variant="soft" count={2} />
+    <section className="relative overflow-hidden bg-cream py-24 dark:bg-[#111009]">
       <div className="relative z-10 mx-auto max-w-6xl px-6">
         <div className="mb-4 text-center font-sans text-xs font-bold uppercase tracking-widest text-primary">
           Lo que dicen
         </div>
         <h2
-          className="mb-16 text-center font-serif font-bold text-ink dark:text-[#e8e4dc]"
+          className="text-center font-serif font-bold text-ink dark:text-[#e8e4dc]"
           style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.15 }}
         >
           Restaurantes que ya dejaron el cuaderno
         </h2>
       </div>
 
-      <Marquee pauseOnHover className="[--duration:60s] [--gap:1.5rem]" repeat={4}>
-        {TESTIMONIOS.map((t) => (
-          <Card key={t.nombre} t={t} />
-        ))}
-      </Marquee>
+      {/* 3D wall — pulled up under the heading; its blurred top hides rising cards */}
+      <div className="relative -mt-40 flex h-[640px] w-full items-center justify-center [perspective:900px]">
+        <div
+          className="flex h-full flex-row gap-5"
+          style={{
+            transform:
+              "translateY(0px) rotateX(11deg) rotateZ(-5deg) scale(1.2)",
+          }}
+        >
+          {COLUMNS.map((col, i) => (
+            <Marquee
+              key={i}
+              vertical
+              pauseOnHover
+              reverse={col.reverse}
+              repeat={4}
+              className={`h-full [--duration:80s] [--gap:1.25rem] ${col.show}`}
+            >
+              {col.data.map((t, j) => (
+                <Card key={`${t.nombre}-${j}`} t={t} />
+              ))}
+            </Marquee>
+          ))}
+        </div>
+
+        {/* Periphery blur: sharp center, strong blur on every edge. Vertical radius kept
+            small so top/bottom reach full blur before the edge — no straight cut. */}
+        <div
+          className="pointer-events-none absolute -inset-y-24 inset-x-0 backdrop-blur-[18px]"
+          style={{
+            maskImage:
+              "radial-gradient(ellipse 78% 50% at 50% 50%, transparent 26%, black 70%)",
+            WebkitMaskImage:
+              "radial-gradient(ellipse 78% 50% at 50% 50%, transparent 26%, black 70%)",
+          }}
+        />
+        {/* Theme-aware color fade so edge cards melt into the section bg */}
+        <div className="pointer-events-none absolute -inset-y-24 inset-x-0 bg-[radial-gradient(ellipse_85%_55%_at_50%_50%,transparent_32%,#faf9f7_78%)] dark:bg-[radial-gradient(ellipse_85%_55%_at_50%_50%,transparent_32%,#111009_78%)]" />
+      </div>
     </section>
   )
 }
