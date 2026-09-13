@@ -58,71 +58,79 @@ bun run dev
 
 ## 🏗 Project Structure
 
-The landing page is organized around a single route and a set of reusable sections.
+The landing page is organized around a single Astro route and modular React sections with Magic UI components.
 
 ```text
 src/
 ├── components/
-│   ├── Footer.astro
-│   ├── Nav.astro
-│   ├── react/
-│   │   ├── Hero.tsx
-│   │   ├── LogosMarquee.tsx
-│   │   ├── Features.tsx
-│   │   ├── BeforeAfter.tsx
-│   │   ├── RealtimeBeam.tsx
-│   │   ├── Roles.tsx
-│   │   ├── Stats.tsx
-│   │   ├── Testimonial.tsx
-│   │   ├── Pricing.tsx
-│   │   ├── FAQ.tsx
-│   │   └── CTA.tsx
-│   └── ui/
+│   ├── landing/
+│   │   ├── Navbar.tsx         # Fixed navigation with responsive drawer & scroll lock
+│   │   ├── Hero.tsx           # Hero section, ShimmerButton, live sync bar & NumberTicker
+│   │   ├── Mockups.tsx        # Interactive tabbed interface for system preview
+│   │   ├── Roles.tsx          # Asymmetric Bento grid (Dueño, Mozo, Cocina, Caja)
+│   │   ├── Flujo.tsx          # Real-time station sync with Magic UI AnimatedBeam
+│   │   ├── Testimonios.tsx    # 3D infinite marquee wall with periphery blur
+│   │   ├── Precios.tsx        # Monthly/Annual pricing (-20%), BorderBeam & ShimmerButton
+│   │   ├── FAQ.tsx            # Accessible accordion resolving commercial objections
+│   │   ├── CTAFinal.tsx       # Conversion closer with ShimmerButton & trust badges
+│   │   ├── Footer.tsx         # Semantic links, contact info, and legal notes
+│   │   ├── fx/                # GlowOrbs and WaveBackground atmospheric effects
+│   │   └── mockups/           # 100% interactive tactile system demos:
+│   │       ├── MesasMockup.tsx    # Live table status switcher
+│   │       ├── ComandasMockup.tsx # Dish prep status toggles with live counters
+│   │       ├── CocinaMockup.tsx   # KDS kitchen board simulation
+│   │       └── CajaMockup.tsx     # 1-click cash close audit test
+│   └── ui/                    # Magic UI & design system primitives:
+│       ├── animated-beam.tsx  # Dynamic bezier SVG connector with ResizeObserver
+│       ├── blur-fade.tsx      # Staggered progressive viewport reveal
+│       ├── border-beam.tsx    # Animated conic-gradient perimeter beam
+│       ├── marquee.tsx        # Infinite smooth ticker animation
+│       ├── number-ticker.tsx  # Viewport-triggered animated metric counters
+│       ├── shimmer-button.tsx # Polymorphic high-conversion button with shimmer
+│       └── silk-background.tsx# Procedural flowing mesh background
 ├── layouts/
-│   └── main.astro
+│   └── Layout.astro           # HTML5 shell, OpenGraph, JSON-LD Schema & viewport
 ├── pages/
-│   └── index.astro
+│   └── index.astro            # Main page composition with selective hydration
 └── styles/
-    └── global.css
+    └── globals.css            # Tailwind CSS v4 design tokens and keyframes
 ```
 
 ### Main entry points
 
 - [src/pages/index.astro](src/pages/index.astro) composes the full landing page.
-- [src/layouts/main.astro](src/layouts/main.astro) sets the page shell, metadata, and theme bootstrap.
-- [src/styles/global.css](src/styles/global.css) contains the global visual system.
+- [src/layouts/Layout.astro](src/layouts/Layout.astro) sets the page shell, metadata, OpenGraph, and Schema.org JSON-LD.
+- [src/styles/globals.css](src/styles/globals.css) contains the global visual tokens and keyframe animations.
 
 ---
 
 ## 🎯 Content Flow
 
-The page is structured as a narrative sequence:
+The page is structured as an intentional narrative sequence:
 
-1. Hero section with the core product positioning.
-2. Logo marquee and social proof.
-3. Feature blocks describing the product value.
-4. Before/after contrast to show operational improvement.
-5. Real-time section to explain live synchronization.
-6. Roles section to map the system to operational personas.
-7. Metrics, testimonials, pricing, FAQ, and CTA.
-
-This structure mirrors a high-conversion product landing rather than a generic documentation page.
+1. **Hero**: Core value proposition, live operational sync status, and Magic UI ShimmerButton CTA.
+2. **Interactive Mockups**: Tactile, clickable preview of Tables, Orders, Kitchen KDS, and Cash Close.
+3. **Roles Bento Grid**: Asymmetric value hierarchy tailored for Owners, Waiters, Kitchen, and Cashiers.
+4. **Flujo de Operaciones**: Live connected architecture diagram with `AnimatedBeam` showing zero-latency ticket dispatch.
+5. **Testimonios**: 3D perspective wall featuring real restaurant owners across Peru.
+6. **Precios**: Transparent pricing with Monthly/Annual discount calculation (-20%) and WhatsApp activation links.
+7. **FAQ**: Accessible 6-item accordion answering operational and fiscal (SUNAT) objections.
+8. **Final CTA & Footer**: High-conversion trial closer and comprehensive navigation.
 
 ---
 
 ## 🧩 Components
 
-The landing is assembled from focused sections that each handle one part of the story.
+The landing is assembled from focused sections that each handle one part of the story:
 
-- [src/components/react/Hero.tsx](src/components/react/Hero.tsx) introduces the product.
-- [src/components/react/Features.tsx](src/components/react/Features.tsx) summarizes the main benefits.
-- [src/components/react/BeforeAfter.tsx](src/components/react/BeforeAfter.tsx) shows the operational contrast.
-- [src/components/react/RealtimeBeam.tsx](src/components/react/RealtimeBeam.tsx) emphasizes live behavior.
-- [src/components/react/Roles.tsx](src/components/react/Roles.tsx) explains usage by role.
-- [src/components/react/Stats.tsx](src/components/react/Stats.tsx) communicates measurable value.
-- [src/components/react/Pricing.tsx](src/components/react/Pricing.tsx) presents the commercial angle.
-- [src/components/react/FAQ.tsx](src/components/react/FAQ.tsx) resolves common questions.
-- [src/components/react/CTA.tsx](src/components/react/CTA.tsx) closes the conversion flow.
+- [src/components/landing/Hero.tsx](src/components/landing/Hero.tsx) introduces the platform with live sync feedback.
+- [src/components/landing/Mockups.tsx](src/components/landing/Mockups.tsx) renders the interactive restaurant simulator.
+- [src/components/landing/Roles.tsx](src/components/landing/Roles.tsx) explains benefits by operational role in a Bento grid.
+- [src/components/landing/Flujo.tsx](src/components/landing/Flujo.tsx) demonstrates data flow using `AnimatedBeam`.
+- [src/components/landing/Testimonios.tsx](src/components/landing/Testimonios.tsx) provides social proof with infinite marquee.
+- [src/components/landing/Precios.tsx](src/components/landing/Precios.tsx) displays plans with BorderBeam and billing toggle.
+- [src/components/landing/FAQ.tsx](src/components/landing/FAQ.tsx) clarifies questions and handles objections.
+- [src/components/landing/CTAFinal.tsx](src/components/landing/CTAFinal.tsx) closes the conversion funnel.
 
 ---
 
