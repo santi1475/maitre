@@ -1,0 +1,22 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#111009"/>
+  <circle cx="950" cy="180" r="300" fill="#00c75b" fill-opacity="0.12" filter="blur(80px)"/>
+  <circle cx="200" cy="500" r="250" fill="#00c75b" fill-opacity="0.08" filter="blur(80px)"/>
+  <g transform="translate(100, 140)">
+    <text x="0" y="50" font-family="Georgia, serif" font-size="52" font-weight="bold" fill="#e8e4dc">maitre<tspan fill="#00c75b">•</tspan></text>
+    <rect x="0" y="90" width="280" height="32" rx="16" fill="#00c75b" fill-opacity="0.15" stroke="#00c75b" stroke-width="1" stroke-opacity="0.4"/>
+    <circle cx="20" cy="106" r="5" fill="#00c75b"/>
+    <text x="35" y="112" font-family="sans-serif" font-size="13" font-weight="bold" fill="#00c75b" letter-spacing="1">GESTIÓN GASTRONÓMICA</text>
+    <text x="0" y="200" font-family="Georgia, serif" font-size="56" font-weight="bold" fill="#ffffff" line-height="1.15">
+      El restaurante que mereces,
+    </text>
+    <text x="0" y="270" font-family="Georgia, serif" font-size="56" font-weight="bold" fill="#ffffff">
+      sin el <tspan fill="#00c75b">caos</tspan> que conoces.
+    </text>
+    <text x="0" y="340" font-family="sans-serif" font-size="24" fill="#a7a09c">
+      Salón, cocina KDS, comandas digitales y cierres de caja en tiempo real.
+    </text>
+    <rect x="0" y="390" width="220" height="54" rx="12" fill="#00c75b"/>
+    <text x="35" y="425" font-family="sans-serif" font-size="18" font-weight="bold" fill="#ffffff">Probar gratis →</text>
+  </g>
+</svg>

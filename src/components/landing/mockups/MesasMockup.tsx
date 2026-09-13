@@ -43,40 +43,78 @@ const STYLES: Record<Estado, { bg: string; badge: string; label: string }> = {
   },
 }
 
+import { useState } from "react"
+
 export function MesasMockup() {
+  const [mesas, setMesas] = useState<Mesa[]>(MESAS)
+  const [selectedMesa, setSelectedMesa] = useState<number | null>(null)
+
+  function toggleMesa(n: number) {
+    setSelectedMesa(n)
+    setMesas((prev) =>
+      prev.map((m) => {
+        if (m.n !== n) return m
+        if (m.estado === "libre") return { ...m, estado: "ocupada", personas: 2, tiempo: "00:01" }
+        if (m.estado === "ocupada") return { ...m, estado: "cuenta" }
+        return { ...m, estado: "libre", personas: undefined, tiempo: undefined }
+      })
+    )
+  }
+
+  const libres = mesas.filter((m) => m.estado === "libre").length
+  const ocupadas = mesas.filter((m) => m.estado === "ocupada").length
+  const cuentas = mesas.filter((m) => m.estado === "cuenta").length
+
   return (
-    <div className="h-full w-full overflow-hidden p-4 font-sans">
-      <div className="grid h-full grid-cols-4 grid-rows-3 gap-2">
-        {MESAS.map((m) => {
+    <div className="flex h-full w-full flex-col justify-between overflow-hidden p-3 sm:p-4 font-sans">
+      {/* Quick live status bar */}
+      <div className="mb-2.5 flex items-center justify-between text-xs font-medium text-stone">
+        <div className="flex items-center gap-3">
+          <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-primary" /> {libres} Libres</span>
+          <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-amber-500" /> {ocupadas} Ocupadas</span>
+          <span className="flex items-center gap-1.5"><span className="h-2 w-2 rounded-full bg-red-500" /> {cuentas} Cuenta</span>
+        </div>
+        <span className="hidden sm:inline text-[11px] text-stone/70 italic">Toca una mesa para interactuar</span>
+      </div>
+
+      <div className="grid flex-1 grid-cols-3 sm:grid-cols-4 gap-2 overflow-y-auto pr-0.5">
+        {mesas.map((m) => {
           const s = STYLES[m.estado]
+          const isCurrent = selectedMesa === m.n
           return (
-            <div
+            <button
               key={m.n}
-              className={`flex flex-col justify-between rounded-lg border p-2 ${s.bg}`}
+              type="button"
+              onClick={() => toggleMesa(m.n)}
+              className={`flex flex-col justify-between rounded-xl border p-2 text-left transition-all duration-150 active:scale-95 cursor-pointer hover:shadow-xs ${s.bg} ${isCurrent ? "ring-2 ring-primary" : ""}`}
             >
-              <div className="flex items-start justify-between">
-                <span className="font-serif text-2xl font-bold text-ink dark:text-[#e8e4dc]">
+              <div className="flex items-start justify-between w-full">
+                <span className="font-serif text-lg sm:text-2xl font-bold text-ink dark:text-[#e8e4dc]">
                   {m.n}
                 </span>
                 <span
-                  className={`rounded-full px-1.5 py-0.5 text-[9px] font-bold uppercase ${s.badge}`}
+                  className={`rounded-full px-1.5 py-0.5 text-[8px] sm:text-[9px] font-bold uppercase tracking-wider ${s.badge}`}
                 >
                   {s.label}
                 </span>
               </div>
-              {m.estado !== "libre" && (
-                <div className="flex items-center gap-2 text-[10px] text-stone-dark dark:text-stone">
-                  <span className="inline-flex items-center gap-0.5">
-                    <Users className="h-2.5 w-2.5" />
-                    {m.personas}
-                  </span>
-                  <span className="inline-flex items-center gap-0.5">
-                    <Clock className="h-2.5 w-2.5" />
-                    {m.tiempo}
-                  </span>
-                </div>
-              )}
-            </div>
+              <div className="mt-1 flex items-center gap-1.5 sm:gap-2 text-[9px] sm:text-[10px] text-stone-dark dark:text-stone min-h-[14px]">
+                {m.estado !== "libre" ? (
+                  <>
+                    <span className="inline-flex items-center gap-0.5">
+                      <Users className="h-2.5 w-2.5" />
+                      {m.personas}p
+                    </span>
+                    <span className="inline-flex items-center gap-0.5">
+                      <Clock className="h-2.5 w-2.5" />
+                      {m.tiempo}
+                    </span>
+                  </>
+                ) : (
+                  <span className="text-stone/60">Disponible</span>
+                )}
+              </div>
+            </button>
           )
         })}
       </div>

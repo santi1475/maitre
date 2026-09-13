@@ -5,25 +5,120 @@ import ThemeScript from "@/components/ThemeScript.astro"
 interface Props {
   title?: string
   description?: string
+  canonicalUrl?: string
+  ogImage?: string
 }
 
 const {
-  title = "Maitre · Sistema de gestión para restaurantes",
-  description = "Pedidos, mesas, cocina y cierres en tiempo real. Auditoría exhaustiva, idempotencia end-to-end y operación multi-sucursal.",
+  title = "Maitre · Software de Gestión para Restaurantes | POS, Cocina y Mesas",
+  description = "Conecta salón, cocina y caja en tiempo real. Sistema para restaurantes sin papeles ni comandas perdidas. Cierres de caja en 8 minutos y control total en Perú y Latinoamérica.",
+  canonicalUrl = "https://maitre.pe",
+  ogImage = "https://maitre.pe/og-image.svg",
 } = Astro.props
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://maitre.pe/#software",
+      "name": "Maitre",
+      "operatingSystem": "Web, Android, iOS, Windows, macOS",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Restaurant Management System",
+      "description": description,
+      "url": canonicalUrl,
+      "image": ogImage,
+      "inLanguage": "es",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Plan Básico",
+          "price": "199",
+          "priceCurrency": "PEN",
+          "priceValidUntil": "2027-12-31",
+          "description": "Hasta 20 mesas, comandas, cocina, caja y soporte por WhatsApp."
+        },
+        {
+          "@type": "Offer",
+          "name": "Plan Pro",
+          "price": "349",
+          "priceCurrency": "PEN",
+          "priceValidUntil": "2027-12-31",
+          "description": "Mesas ilimitadas, mozos sin límite, multi-local y soporte prioritario."
+        }
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "148",
+        "bestRating": "5"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://maitre.pe/#organization",
+      "name": "Maitre Gastronomía",
+      "legalName": "G.V. Enterprise SAC",
+      "url": "https://maitre.pe",
+      "logo": "https://maitre.pe/favicon.svg",
+      "sameAs": [
+        "https://instagram.com/maitre"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+51-999-999-999",
+        "areaServed": ["PE", "CL", "CO", "MX"],
+        "availableLanguage": ["es"]
+      }
+    }
+  ]
+}
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang="es" class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta name="keywords" content="sistema para restaurantes, software para restaurantes peru, comandas digitales, punto de venta restaurante, KDS cocina, control de mesas, cierre de caja" />
+
+    <!-- Favicon & Touch Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- Theme Colors -->
+    <meta name="theme-color" content="#faf9f7" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111009" media="(prefers-color-scheme: dark)" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content="Maitre - Sistema de Gestión Gastronómica" />
+    <meta property="og:site_name" content="Maitre" />
+    <meta property="og:locale" content="es_PE" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonicalUrl} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Structured Data (JSON-LD) -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
     <ThemeScript />
   </head>
-  <body class="bg-cream dark:bg-[#111009] text-ink dark:text-[#e8e4dc] font-sans antialiased">
+  <body class="bg-cream dark:bg-[#111009] text-ink dark:text-[#e8e4dc] font-sans antialiased selection:bg-primary/20 selection:text-ink dark:selection:bg-primary/30 dark:selection:text-[#e8e4dc]">
     <slot />
   </body>
 </html>

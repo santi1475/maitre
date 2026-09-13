@@ -67,34 +67,34 @@ function Card({ t }: { t: Testimonio }) {
 
 // Each column: a vertical marquee, alternating direction, with a rotated card order.
 const COLUMNS = [
-  { reverse: false, data: rotate(TESTIMONIOS, 0), show: "" },
-  { reverse: true, data: rotate(TESTIMONIOS, 1), show: "" },
+  { reverse: false, data: rotate(TESTIMONIOS, 0), show: "flex" },
+  { reverse: true, data: rotate(TESTIMONIOS, 1), show: "hidden sm:flex" },
   { reverse: false, data: rotate(TESTIMONIOS, 2), show: "hidden md:flex" },
   { reverse: true, data: rotate(TESTIMONIOS, 1), show: "hidden lg:flex" },
 ]
 
 export function Testimonios() {
   return (
-    <section className="relative overflow-hidden bg-cream py-24 dark:bg-[#111009]">
-      <div className="relative z-10 mx-auto max-w-6xl px-6">
-        <div className="mb-4 text-center font-sans text-xs font-bold uppercase tracking-widest text-primary">
-          Lo que dicen
-        </div>
+    <section id="testimonios" className="relative scroll-mt-20 overflow-hidden bg-cream py-20 dark:bg-[#111009] md:py-32">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6">
         <h2
           className="text-center font-serif font-bold text-ink dark:text-[#e8e4dc]"
           style={{ fontSize: "clamp(2rem, 4vw, 3rem)", lineHeight: 1.15 }}
         >
           Restaurantes que ya dejaron el cuaderno
         </h2>
+        <p className="mt-3 text-center font-sans text-base sm:text-lg text-stone max-w-xl mx-auto">
+          Casos reales de cevicherías, pollerías y restaurantes en todo el Perú.
+        </p>
       </div>
 
-      {/* 3D wall — pulled up under the heading; its blurred top hides rising cards */}
-      <div className="relative -mt-40 flex h-[640px] w-full items-center justify-center [perspective:900px]">
+      {/* 3D wall — pulled up under the heading on desktop; clean margin on mobile */}
+      <div className="relative mt-8 md:-mt-20 lg:-mt-28 flex h-[580px] sm:h-[640px] w-full items-center justify-center [perspective:900px] overflow-hidden">
         <div
-          className="flex h-full flex-row gap-5"
+          className="flex h-full flex-row gap-4 sm:gap-5"
           style={{
             transform:
-              "translateY(0px) rotateX(11deg) rotateZ(-5deg) scale(1.2)",
+              "translateY(0px) rotateX(8deg) rotateZ(-3deg)",
           }}
         >
           {COLUMNS.map((col, i) => (
@@ -104,7 +104,7 @@ export function Testimonios() {
               pauseOnHover
               reverse={col.reverse}
               repeat={4}
-              className={`h-full [--duration:80s] [--gap:1.25rem] ${col.show}`}
+              className={`h-full [--duration:75s] [--gap:1rem] sm:[--gap:1.25rem] ${col.show}`}
             >
               {col.data.map((t, j) => (
                 <Card key={`${t.nombre}-${j}`} t={t} />
@@ -113,19 +113,18 @@ export function Testimonios() {
           ))}
         </div>
 
-        {/* Periphery blur: sharp center, strong blur on every edge. Vertical radius kept
-            small so top/bottom reach full blur before the edge — no straight cut. */}
+        {/* Periphery blur: sharp center, strong blur on every edge */}
         <div
-          className="pointer-events-none absolute -inset-y-24 inset-x-0 backdrop-blur-[18px]"
+          className="pointer-events-none absolute -inset-y-20 inset-x-0 backdrop-blur-[14px]"
           style={{
             maskImage:
-              "radial-gradient(ellipse 78% 50% at 50% 50%, transparent 26%, black 70%)",
+              "radial-gradient(ellipse 78% 50% at 50% 50%, transparent 28%, black 72%)",
             WebkitMaskImage:
-              "radial-gradient(ellipse 78% 50% at 50% 50%, transparent 26%, black 70%)",
+              "radial-gradient(ellipse 78% 50% at 50% 50%, transparent 28%, black 72%)",
           }}
         />
         {/* Theme-aware color fade so edge cards melt into the section bg */}
-        <div className="pointer-events-none absolute -inset-y-24 inset-x-0 bg-[radial-gradient(ellipse_85%_55%_at_50%_50%,transparent_32%,#faf9f7_78%)] dark:bg-[radial-gradient(ellipse_85%_55%_at_50%_50%,transparent_32%,#111009_78%)]" />
+        <div className="pointer-events-none absolute -inset-y-20 inset-x-0 bg-[radial-gradient(ellipse_85%_55%_at_50%_50%,transparent_35%,#faf9f7_78%)] dark:bg-[radial-gradient(ellipse_85%_55%_at_50%_50%,transparent_35%,#111009_78%)]" />
       </div>
     </section>
   )

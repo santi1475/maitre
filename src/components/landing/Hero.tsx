@@ -4,6 +4,8 @@ import { motion, useReducedMotion, type Variants } from "motion/react"
 import { NumberTicker } from "@/components/ui/number-ticker"
 import { SilkBackground } from "@/components/ui/silk-background"
 
+import { ShimmerButton } from "@/components/ui/shimmer-button"
+
 const container: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.1, delayChildren: 0.05 } },
@@ -72,68 +74,60 @@ export function Hero() {
             variants={variantsItem}
             className="mt-10 flex flex-wrap justify-center gap-4"
           >
-            <a
+            <ShimmerButton
               href="#empezar"
-              className="rounded-xl bg-primary px-8 py-3.5 text-base font-bold text-white transition-colors hover:bg-primary-dark"
+              shimmerColor="#ffffff"
+              background="#00c75b"
+              className="w-full sm:w-auto text-base font-bold shadow-md hover:shadow-primary/30"
             >
               Empezar gratis →
-            </a>
+            </ShimmerButton>
             <a
-              href="#demo"
-              className="rounded-xl border border-stone/40 px-8 py-3.5 text-base font-bold text-ink transition-colors hover:border-primary hover:text-primary dark:text-[#e8e4dc] dark:hover:text-primary"
+              href="#funciones"
+              className="rounded-xl border border-stone/30 bg-cream/60 px-8 py-3.5 text-base font-bold text-ink backdrop-blur-xs transition-colors hover:border-primary hover:text-primary dark:bg-white/5 dark:text-[#e8e4dc] dark:hover:border-primary dark:hover:text-primary"
             >
-              Ver cómo funciona
+              Ver cómo funciona ↓
             </a>
           </motion.div>
 
-          {/* TODO: reemplazar este mockup placeholder por <ProductMockup /> cuando esté listo */}
+          {/* Live System Synced Teaser */}
           <motion.div
             variants={variantsItem}
-            className="relative mx-auto mt-16 max-w-3xl"
+            className="mx-auto mt-14 max-w-2xl"
           >
-            <div className="absolute -top-3 left-1/2 z-10 -translate-x-1/2">
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-ink px-3 py-1 font-sans text-xs font-medium text-white dark:bg-white/10">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                Demo interactiva próximamente
+            <div className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 rounded-2xl border border-stone/20 bg-white/70 p-3 sm:p-4 shadow-sm backdrop-blur-md dark:border-white/10 dark:bg-[#1a1714]/80">
+              <span className="flex items-center gap-1.5 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                <span className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+                Salón en vivo
               </span>
-            </div>
-            <div className="relative aspect-video overflow-hidden rounded-2xl border border-stone/20 bg-ink/5 dark:bg-white/5">
-              <div
-                className="absolute inset-0 animate-pulse"
-                style={{
-                  background:
-                    "linear-gradient(110deg, transparent 30%, rgba(0,199,91,0.08) 50%, transparent 70%)",
-                  backgroundSize: "200% 100%",
-                }}
-              />
-              <div className="absolute inset-6 flex flex-col gap-3">
-                <div className="h-6 w-32 rounded bg-stone/20 dark:bg-white/10" />
-                <div className="grid flex-1 grid-cols-3 gap-3">
-                  <div className="rounded-lg bg-stone/15 dark:bg-white/5" />
-                  <div className="rounded-lg bg-stone/15 dark:bg-white/5" />
-                  <div className="rounded-lg bg-stone/15 dark:bg-white/5" />
-                </div>
-                <div className="h-3 w-2/3 rounded bg-stone/15 dark:bg-white/5" />
-                <div className="h-3 w-1/2 rounded bg-stone/15 dark:bg-white/5" />
-              </div>
+              <span className="text-stone/40 hidden sm:inline">•</span>
+              <span className="flex items-center gap-1.5 rounded-full bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-700 dark:text-amber-400">
+                <span className="h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
+                Cocina KDS sincronizada
+              </span>
+              <span className="text-stone/40 hidden sm:inline">•</span>
+              <span className="flex items-center gap-1.5 rounded-full bg-stone/15 px-3 py-1 text-xs font-semibold text-stone-dark dark:text-stone">
+                <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                Caja lista para cuadre
+              </span>
             </div>
           </motion.div>
         </div>
       </motion.section>
 
-      <section className="border-y border-primary/10 bg-primary-light py-10 dark:bg-primary/5">
-        <div className="mx-auto grid max-w-5xl grid-cols-3 divide-x divide-primary/20 px-6">
+      <section className="border-y border-primary/15 bg-primary-light/80 py-8 sm:py-10 dark:bg-primary/5">
+        <div className="mx-auto grid max-w-5xl grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-primary/20 px-6">
           {METRICS.map((m) => (
-            <div key={m.label} className="px-4 text-center">
-              <div className="font-serif text-4xl font-bold text-ink dark:text-[#e8e4dc]">
+            <div key={m.label} className="py-4 sm:py-0 px-4 text-center">
+              <div className="font-serif text-3xl sm:text-4xl font-bold text-ink dark:text-[#e8e4dc]">
                 {m.prefix}
                 <NumberTicker
                   value={m.value}
-                  className="font-serif text-4xl font-bold !text-ink dark:!text-[#e8e4dc]"
+                  className="font-serif text-3xl sm:text-4xl font-bold !text-ink dark:!text-[#e8e4dc]"
                 />
                 {m.suffix}
               </div>
-              <div className="mt-1 font-sans text-sm uppercase tracking-wide text-stone">
+              <div className="mt-1 font-sans text-xs sm:text-sm uppercase tracking-wider text-stone-dark/80 dark:text-stone">
                 {m.label}
               </div>
             </div>

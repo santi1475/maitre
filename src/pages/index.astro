@@ -8,12 +8,13 @@ import {
   Roles,
   Testimonios,
   Precios,
+  FAQ,
   CTAFinal,
   Footer,
 } from "../components/landing"
 ---
 
-<Layout title="Maitre - Gestión Inteligente para Restaurantes">
+<Layout title="Maitre · Software de Gestión para Restaurantes | POS, Cocina KDS y Mesas">
   <Navbar client:load />
   <main class="overflow-x-hidden">
     <Hero client:load />
@@ -22,6 +23,7 @@ import {
     <Roles client:visible />
     <Testimonios client:visible />
     <Precios client:visible />
+    <FAQ client:visible />
     <CTAFinal client:visible />
   </main>
   <Footer />
